@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.sell.mapper.ProductInfoDao">
+    <insert id="insertProduct">
+        insert into `product_info` (`product_id`, `product_name`, `product_price`, `product_stock`,
+                                    `product_description`,
+                                    `product_icon`, `product_status`, `category_type`)
+        values (#{productId}, #{productName}, #{productPrice}, #{productStock}, #{productDescription}, #{productIcon},
+                #{productStatus}, #{categoryType});
+    </insert>
+    <update id="updateStock">
+        update `product_info`
+        set `product_stock` = #{productStock}
+        where `product_id` = #{productId}
+    </update>
+    <update id="updateProductStatus">
+        update `product_info`
+        set `product_status`=#{productStatus}
+        where `product_id` = #{productId}
+    </update>
+    <update id="update">
+        update `product_info`
+        set `product_name`=#{productName},
+            `product_price`=#{productPrice},
+            `product_stock`=#{productStock},
+            `product_description`=#{productDescription},
+            `product_icon`=#{productIcon},
+            `product_status`=#{productStatus},
+            `category_type`=#{categoryType}
+        where `product_id` = #{productId}
+    </update>
+    <select id="findByProductStatus" resultType="com.wechat.sell.bean.ProductInfo">
+        select *
+        from `product_info`
+        where `product_status` = #{productStatus}
+    </select>
+    <select id="findOne" resultType="com.wechat.sell.bean.ProductInfo">
+        select *
+        from `product_info`
+        where `product_id` = #{productId}
+    </select>
+    <select id="findAll" resultType="com.wechat.sell.bean.ProductInfo">
+        select *
+        from `product_info`
+    </select>
+</mapper>

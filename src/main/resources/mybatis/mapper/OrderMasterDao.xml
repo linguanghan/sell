@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.sell.mapper.OrderMasterDao">
+    <insert id="save">
+        insert into `order_master`(`order_id`, `buyer_name`, `buyer_phone`, `buyer_address`, `buyer_openid`,
+                                   `buyer_amount`, `buyer_status`, `pay_status`)
+        values (#{orderId}, #{buyerName}, #{buyerPhone}, #{buyerAddress}, #{buyerOpenid}, #{buyerAmount},
+                #{buyerStatus}, #{payStatus})
+    </insert>
+    <update id="update">
+        update `order_master`
+        set `buyer_status`=#{buyerStatus},
+            `pay_status`=#{payStatus}
+        where `order_id` = #{orderId}
+    </update>
+    <select id="findAll" resultType="com.wechat.sell.bean.OrderMaster">
+        select *
+        from `order_master`
+    </select>
+    <select id="findByBuyerOpenId" resultType="com.wechat.sell.bean.OrderMaster">
+        select *
+        from `order_master`
+        where `buyer_openid` = #{openId}
+        order by `update_time` desc
+    </select>
+    <select id="findOneByOrderId" resultType="com.wechat.sell.bean.OrderMaster">
+        select *
+        from `order_master`
+        where `order_id` = #{orderId}
+    </select>
+</mapper>

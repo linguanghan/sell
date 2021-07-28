@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.sell.mapper.UserDao">
+    <select id="getUsername" resultType="java.lang.Integer">
+        select count(*)
+        from `user_info`
+        where `buyer_openid` = #{username}
+    </select>
+    <select id="getUserInfoByUsername" resultType="com.wechat.sell.bean.UserInfo">
+        select `buyer_openid` username, `password` pass from `user_info`
+        where `buyer_openid` = #{username}
+    </select>
+</mapper>
